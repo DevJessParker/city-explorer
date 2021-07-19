@@ -22,7 +22,7 @@ Pair programmed whiteboard WRRC diagram with Tim Ma.
 ![lab6 whiteboard](./src/img/wrrc06.jpg)
 
 
-Name of feature: Aynchronous Code and APIs
+Name of feature: Aynchronous Code and API
 
 Estimate of time needed to complete: 2.5 hours
 
