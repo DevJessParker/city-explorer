@@ -1,9 +1,12 @@
+
 # City-Explorer
+
 
 **Author**: Jessica Parker
 **Version**: 1.0.0 (increment the patch/fix version number if you make more commits past your first submission)
 
 ## Overview
+
 Geo-location user interface that relies on API and Asynchronous code to deliver map and location-based data.
 
 ## Getting Started
@@ -31,4 +34,4 @@ Start time: 5:00pm
 
 Finish time: _____
 
-Actual time needed to complete: _____
+
