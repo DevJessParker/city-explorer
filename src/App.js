@@ -6,8 +6,8 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      searchQuery = '',
-      location = {}
+      searchQuery: '',
+      location: {}
     }
   }
 
