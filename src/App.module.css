@@ -1,0 +1,11 @@
+.searchbar {
+  display: block;
+  margin: 6vw;
+  width: 30%;
+  justify-self: center;
+}
+
+.mapCard {
+  margin: 6vw;
+  color: black;
+}
