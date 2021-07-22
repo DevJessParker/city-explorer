@@ -25,7 +25,7 @@ class App extends React.Component {
   getLocation = async (e) => {
     e.preventDefault();
   
-    
+      try {
       const locationAPI = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_API_KEY}&q=${this.state.searchQuery}&format=json`;
       const response = await axios.get(locationAPI)
       this.setState({ location: response.data[0] })
@@ -34,13 +34,14 @@ class App extends React.Component {
       const mapResponse = await axios.get(mapAPI);
       this.setState({ map: mapResponse.config.url })
       
-    
-      console.log("state location", this.state.location)
       const weatherAPI = `http://localhost:3001/weather?lat=${this.state.location.lat}&lon=${this.state.location.lon}&searchQuery=${this.state.searchQuery}`;
+
       const weatherResponse = await axios.get(weatherAPI);
       console.log("weather response", weatherResponse.data)
       this.setState({ weather: weatherResponse.data });
-      
+      } catch {
+        window.alert("ERROR: Cannot GeoCode Location")
+      }
     }
   
 
@@ -60,19 +61,19 @@ class App extends React.Component {
           </Button>
         </InputGroup>
         </Form>
-
-        <Card style={{ width: '18rem' }} className={styles.mapCard}>
-          <Card.Img variant="top" src={this.state.map} />
-          <Card.Body>
-          <Card.Title>{this.state.location.display_name}</Card.Title>
-          <Card.Text>Lat: {this.state.location.lat}</Card.Text>
-          <Card.Text>Lon: {this.state.location.lon}</Card.Text>
-          <Button variant="primary">Bookmark Location</Button>
-        </Card.Body>
-      </Card>
-
-        <Weather weather={this.state.weather}/>
-
+        
+          <Card style={{ width: '18rem' }} className={styles.mapCard}>
+            <Card.Img variant="top" src={this.state.map} />
+            <Card.Body>
+            <Card.Title>{this.state.location.display_name}</Card.Title>
+            <Card.Text>Lat: {this.state.location.lat}</Card.Text>
+            <Card.Text>Lon: {this.state.location.lon}</Card.Text>
+            <Button variant="primary">Bookmark Location</Button>
+            </Card.Body>
+          </Card>
+          
+          <Weather weather={this.state.weather}/>
+            
       </>
     )
   }
