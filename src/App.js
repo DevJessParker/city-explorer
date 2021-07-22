@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup';
@@ -7,6 +6,9 @@ import FormControl from 'react-bootstrap/FormControl';
 import Form from 'react-bootstrap/Form';
 import './index.css';
 import styles from './App.module.css';
+import axios from 'axios';
+import Weather from './Weather.js';
+
 
 class App extends React.Component {
   constructor(props) {
@@ -15,25 +17,33 @@ class App extends React.Component {
     this.state = {
       searchQuery: '',
       location: {},
-      map: ''
+      map: '',
+      weather: []
     }
   }
 
   getLocation = async (e) => {
     e.preventDefault();
   
-    try {
-      const API = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_API_KEY}&q=${this.state.searchQuery}&format=json`;
-      const response = await axios.get(API)
-      this.setState({ location: response.data[0] })
-    } catch {
-      window.alert("ERROR: Unable to GeoCode")
-    }
     
-    const MAP = `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_API_KEY}&center=${this.state.location.lat},${this.state.location.lon}&zoom=10`;
-    const mapResponse = await axios.get(MAP);
-    this.setState({ map: mapResponse.config.url })
-  }
+      const locationAPI = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_API_KEY}&q=${this.state.searchQuery}&format=json`;
+      const response = await axios.get(locationAPI)
+      this.setState({ location: response.data[0] })
+      
+      const mapAPI = `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_API_KEY}&center=${this.state.location.lat},${this.state.location.lon}&zoom=10`;
+      const mapResponse = await axios.get(mapAPI);
+      this.setState({ map: mapResponse.config.url })
+      
+    
+      console.log("state location", this.state.location)
+      const weatherAPI = `http://localhost:3001/weather?lat=${this.state.location.lat}&lon=${this.state.location.lon}&searchQuery=${this.state.searchQuery}`;
+      const weatherResponse = await axios.get(weatherAPI);
+      console.log("weather response", weatherResponse.data)
+      this.setState({ weather: weatherResponse.data });
+      
+    }
+  
+
 
   render() {
     return (
@@ -60,6 +70,9 @@ class App extends React.Component {
           <Button variant="primary">Bookmark Location</Button>
         </Card.Body>
       </Card>
+
+        <Weather weather={this.state.weather}/>
+
       </>
     )
   }
