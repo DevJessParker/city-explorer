@@ -17,3 +17,9 @@ body {
   background-color: rgb(31, 31, 31);
   color: white;
 }
+
+#forecast {
+  display: flex;
+  flex-wrap: wrap;
+  width: 40vw;
+}
