@@ -42,11 +42,16 @@ class App extends React.Component {
       const mapResponse = await axios.get(mapAPI);
       this.setState({ map: mapResponse.config.url })
       
-      const weatherAPI = `http://localhost:3001/weather?lat=${this.state.location.lat}&lon=${this.state.location.lon}&searchQuery=${this.state.searchQuery}`;
+      // const weatherAPI = `http://localhost:3001/weather?lat=${this.state.location.lat}&lon=${this.state.location.lon}&searchQuery=${this.state.searchQuery}`;
+      const weatherAPI = `https://jp-city-explorer.herokuapp.com/weather?lat=${this.state.location.lat}&lon=${this.state.location.lon}&searchQuery=${this.state.searchQuery}`;
       const weatherResponse = await axios.get(weatherAPI);
       this.setState({ weather: weatherResponse.data })
 
-      const movieAPI = `http://localhost:3001/movies?searchQuery=${this.state.searchQuery}`;
+      // const movieAPI = `http://localhost:3001/movies?searchQuery=${this.state.searchQuery}`;
+      // const movieResponse = await axios.get(movieAPI);
+      // this.setState({ movies: movieResponse.data })
+      // console.log(movieResponse);
+      const movieAPI = `https://jp-city-explorer.herokuapp.com/movies?searchQuery=${this.state.searchQuery}`;
       const movieResponse = await axios.get(movieAPI);
       this.setState({ movies: movieResponse.data })
       console.log(movieResponse);
