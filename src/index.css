@@ -15,11 +15,48 @@ code {
 
 body {
   background-color: rgb(31, 31, 31);
-  color: white;
 }
 
 #forecast {
   display: flex;
   flex-wrap: wrap;
   width: 40vw;
+}
+
+.searchbar {
+  display: block;
+  margin: 6vw;
+  width: 30%;
+  justify-self: center;
+}
+
+.mapCard {
+  margin: 6vw;
+}
+
+.movieCard {
+  display: flex;
+  flex-direction: column;
+  margin: 6vw;
+  justify-content: center;
+  align-content: center;
+  width: 18rem;
+}
+
+.movieCard img {
+  height: 900px;
+  width: 300px;
+  margin: 2rem;
+}
+
+
+.heroDiv {
+  margin-top: 6vw;
+}
+
+.movieCont {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: flex-start;
 }

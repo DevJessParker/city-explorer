@@ -1,31 +1,32 @@
 import React from 'react';
-import Card from 'react-bootstrap/Card';
-import styles from './App.module.css';
-
-
-
+import styles from './Weather.module.css';
 
 
 class Weather extends React.Component {
+  constructor(props){
+    super(props);
+  }
+
+
   
   render() {
     return(
 
-  this.props.weather.map((value, idx) =>
-  <Card style={{ width: '18rem' }} key={idx} className={styles.mapCard}>
-    <Card.Img variant="top" src={value.icon} />
-    <Card.Body>
-      <Card.Title>Date: {value.date}</Card.Title>
-      <Card.Text>Forecast: {value.description}</Card.Text>
-      <Card.Text>Min Temp: {value.mintemp}°F
-      </Card.Text>
-      <Card.Text>Max Temp: {value.maxtemp}°F
-      </Card.Text>
-    </Card.Body>
-  </Card>
-  ))
-  }
-}
+    this.props.weather.map((value, idx) => 
+    <tr key={idx}>
+      <td><img className={styles.weathericon}
+        src={value.icon}
+        alt="Weather on Date"
+      /></td>
+      <td>{value.date}</td>
+      <td>{value.description}</td>
+      <td>{value.mintemp}°F</td>
+      <td>{value.maxtemp}°F</td>
+    </tr>
 
+    )
+  )
+}}
 
-export default Weather;
+export default Weather
+
