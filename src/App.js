@@ -1,10 +1,15 @@
 import React from 'react';
 import axios from 'axios';
-import './index.css';
-import Weather from './Weather.js';
-import MapCard from './MapCard.js'
+import styles from './index.css';
+import MapCard from './MapCard.js';
 import FormSearch from './FormSearch.js';
-import MovieCard from './MovieCard.js'
+import MovieCard from './MovieCard.js';
+import WeatherGroup from './WeatherGroup.js';
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
+
 
 
 class App extends React.Component {
@@ -45,7 +50,7 @@ class App extends React.Component {
       const movieResponse = await axios.get(movieAPI);
       this.setState({ movies: movieResponse.data })
       console.log(movieResponse);
-      } catch {
+      } catch (error) {
         this.setState({errors: error.response.data.error, showError: true})
       }
     }
@@ -54,14 +59,22 @@ class App extends React.Component {
   render() {
     return (
       <>
-        <FormSearch getLocation={this.getLocation.bind(this)} onChange={this.onChange.bind(this)} />
-        
-        <MapCard map={this.state.map} location={this.state.location} lat={this.state.lat} lon={this.state.lon} />
-          
-        <Weather weather={this.state.weather} />
-
-        <MovieCard movies={this.state.movies} />
-
+        <Container fluid="lg" className="heroDiv">
+          <Row>
+            <Col>
+              <FormSearch getLocation={this.getLocation.bind(this)} onChange={this.onChange.bind(this)} />
+            
+              <MapCard map={this.state.map} location={this.state.location} lat={this.state.lat} lon={this.state.lon} />
+            
+            </Col>
+            <Col>
+              <WeatherGroup weather={this.state.weather} />
+            </Col>
+          </Row>
+        </Container>
+        <Container fluid="lg" className="movieCont">
+          <MovieCard movies={this.state.movies} className={styles.movieCard} />
+        </Container>
       </>
     )
   }
